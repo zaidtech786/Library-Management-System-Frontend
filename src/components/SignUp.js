@@ -1,74 +1,109 @@
-// import React,{useState} from 'react';
-// import {NavLink} from "react-router-dom";
-// import "./SignUp.css";
-// import { Params } from 'react-router-dom';
+import React,{useContext, useState} from 'react';
+import "../CSS/Form.css";
+import {NavLink, useNavigate} from "react-router-dom";
+import Axios from "axios"
+import { AppContext } from '../Context/Context';
 
-// const SignUp = (props) => {
-//   const [user,setUser]=useState({
-//     fName:"",
-//     lName:"",
-//     Mno:"",
-//     email:"",
-//     lNo:"",
-//     Password:"",
-//     cPassword:"",
-//   });
+const AdminSignUp = () => {
+    const {stateName} = useContext(AppContext);
+    const navigate=useNavigate()
+  const [user,setUser]=useState({
+    firstName:"",
+    lastName:"",
+    Mobileno:"",
+    email:"",
+    Password:"",
+    cPassword:"",
+  });
    
-//   const handleChange = (e) => {
-//     const {name,value }=e.target;
-//     setUser({
-//       ...user,
-//       [name]:value
-//     })
-//   }
-//   return(
-//   <>
-//       <div className='formCont'>
-//           <div className='form-cont'>
-//           <h3 className='Title'>{props.name}</h3>
+  const handleChange = (e) => {
+    const {name,value }=e.target;
+    setUser({
+      ...user,
+      [name]:value
+    })
+  }
+
+  const postAdminData = () => {
+    // console.log(user.firstName+user.lastName+user.email+user.Mobileno+user.libraryNo+user.Password+user.cPassword)
+    const {firstName,lastName,Mobileno,email,Password,cPassword}=user
+    if (firstName && lastName && Mobileno && email  && Password && (Password===cPassword) ) {
+      Axios.post("http://localhost:4000/adminsignup",{
+        firstName,
+        lastName,
+        Mobileno,
+        email,
+        Password,
+      }).then( res=> alert(res.data.message))
+      navigate("/login")
+    }
+    else{
+     alert("Invalid Input")
+    }
+  }
+
+  const postStudentData= () => {
+    // console.log(user.firstName+user.lastName+user.email+user.Mobileno+user.libraryNo+user.Password+user.cPassword)
+    const {firstName,lastName,Mobileno,email,Password,cPassword}=user
+    if (firstName && lastName && Mobileno && email  && Password && (Password===cPassword) ) {
+      Axios.post("http://localhost:4000/studentsignup",{
+        firstName,
+        lastName,
+        Mobileno,
+        email,
+        Password,
+      }).then( res=> alert(res.data.message))
+      navigate("/login")
+    }
+    else{
+     alert("Invalid Input")
+    }
+  }
+
+
+  return (
+    <>
+     <div className='formCont'>
+          <div className='form-cont'>
+          <h3 className='Title'>{stateName === "admin" ? "Admin SignUp" : "Student Signup"}</h3>
            
-//            <div className='input_field'>
-//            <label className='label'>First Name</label><br/>
-//            <input type="text" name="fName" value={user.fName} onChange={ handleChange} className='inputUser' placeholder="First Name"/>
-//            </div>
+           <div className='input_field'>
+           <label className='label'>First Name</label><br/>
+           <input type="text" name="firstName" value={user.firstName} onChange={ handleChange} className='inputUser' placeholder="First Name"/>
+           </div>
                 
-//            <div className='input_field'>
-//            <label className='label'>Last name</label><br/>
-//            <input type="text"name="lName" value={user.lName} onChange={handleChange}  className='inputUser' placeholder="Last Name"/>
-//            </div>
+           <div className='input_field'>
+           <label className='label'>Last name</label><br/>
+           <input type="text"name="lastName" value={user.lastName} onChange={handleChange}  className='inputUser' placeholder="Last Name"/>
+           </div>
           
-//            <div className='input_field'>
-//           <label className='label'>Email</label><br/>
-//            <input type="email" name="email" value={user.email} onChange={handleChange} className='inputUser' placeholder="Email"/>
-//            </div>
+           <div className='input_field'>
+          <label className='label'>Email</label><br/>
+           <input type="email" name="email" value={user.email} onChange={handleChange} className='inputUser' placeholder="Email"/>
+           </div>
              
-//            <div className='input_field'>
-//            <label className='label'>Phone No</label><br/>
-//            <input type="number" name="Mno" value={user.Mno} onChange={handleChange}  className='inputUser' placeholder="+91 1234 5678 90"/>
-//            </div>
+           <div className='input_field'>
+           <label className='label'>Phone No</label><br/>
+           <input type="number" name="Mobileno" value={user.Mobileno} onChange={handleChange}  className='inputUser' placeholder="+91 1234 5678 90"/>
+           </div>
                   
-//            <div className='input_field'>
-//            <label className='label'>Library No</label><br/>
-//            <input type="number" name="lNo" value={user.lNo} onChange={handleChange} className='inputUser' placeholder="Library No"/>
-//            </div>
+           <div className='input_field'>
+           <label className='label'>password</label><br/>
+           <input type="password" name="Password" value={user.Password} onChange={handleChange}  className='inputUser' placeholder="password"/>
+           </div>
            
-//            <div className='input_field'>
-//            <label className='label'>password</label><br/>
-//            <input type="password" name="password" value={user.Password} onChange={handleChange}  className='inputUser' placeholder="password"/>
-//            </div>
-           
-//            <div className='input_field'>
-//            <label className='label'>Confirm Password</label><br/>
-//            <input type="text" name="cpassword" value={user.cPassword} onChange={handleChange} className='inputUser' placeholder="Confirm Password"/>
-//            </div>
-//            <input type="button" className='buttonbtn' value="Sign Up"/>
-//            <p>Already Have an account  <NavLink to={props.visit}>Sign in</NavLink></p>
+           <div className='input_field'>
+           <label className='label'>Confirm Password</label><br/>
+           <input type="text" name="cPassword" value={user.cPassword} onChange={handleChange} className='inputUser' placeholder="Confirm Password"/>
+           </div>
+           <input type="button" className='buttonbtn' value="Sign Up" onClick={stateName==="admin" ? postAdminData : postStudentData}/>
+           <p>Already Have an account  <NavLink to="/login">Sign in</NavLink></p>
        
-//           </div>
+          </div>
 
-//         </div>
-//   </>
-//   )
-// };
+        </div>
+    </>
+  )
+};
 
-// export default SignUp;
+export default AdminSignUp;

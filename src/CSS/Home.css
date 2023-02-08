@@ -1,0 +1,11 @@
+
+.wrapper{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../Student/Student Icon/library2.png");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    
+}

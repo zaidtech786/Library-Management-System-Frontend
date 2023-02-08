@@ -1,0 +1,29 @@
+.Container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+    width: 500px;
+    height: 500px;
+    background-color: rgb(163, 233, 227);
+    border-radius: 5px;
+}
+
+.img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+h5{
+    color: rgb(0, 0, 0);
+    line-height: 30px;
+}
+.contentt{
+  margin-top: 30px;
+  line-height: 10px;
+  margin-left: 40px;
+}
