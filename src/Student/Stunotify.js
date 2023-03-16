@@ -52,11 +52,12 @@ const Stunotify = () => {
           {data.map((item) => {
             return (
               <>
-                <tbody >
+                <tbody key={item._id} >
                   <tr>
                     <td data-label="Book Name">{item.bookId.bookName}</td>
                     <td data-label="Book Language">{item.bookId.bookLang}</td>
-                    <td data-label="Operation">
+                    <td data-label="Operation" style={{padding:"10px"}}>
+                      <button className="btn btn-success ms-2" style={{margin:" 0 10px"}}  onClick={ ()=>window.open(`${item.bookId.bookPdf}`, '_blank', 'noreferrer')}> Read Book</button>
                       <button className="btn btn-primary" onClick={() => returnBook(item._id)}>Return Book</button>
                     </td>
                     <td data-label="Approved">
@@ -69,7 +70,7 @@ const Stunotify = () => {
           })}
               </>
               :
-              <h2 className="text-centre">No Issuue Book Found</h2>
+             ""
               }
         </table>
       </div>

@@ -35,7 +35,7 @@ import { useNavigate } from 'react-router-dom';
           <Link className={state==="books" ? "menu-active nav-link" : "nav-link"} onClick={()=>setState("books")} to="/books">View Books</Link>
         </li>
         <li className="nav-item">
-          <Link   className={state==="noti" ? "menu-active nav-link" : "nav-link"}  onClick={()=>setState("noti")} to="/stunotify">Notifications</Link>
+          <Link   className={state==="noti" ? "menu-active nav-link" : "nav-link"}  onClick={()=>setState("noti")} to="/stunotify">My Books</Link>
         </li>
         <li className="nav-item">
           <Link   className={state==="profile" ? "menu-active nav-link" : "nav-link"}  onClick={()=>setState("profile")} to="/profile">Profile</Link>
@@ -43,7 +43,7 @@ import { useNavigate } from 'react-router-dom';
         <li className="nav-item dropdown">
      <a className="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown">{saved.firstName}</a>
      <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-     <li> <a className="dropdown-item menu-active" onClick={clearLS} ><IoMdLogOut/>LogOut</a></li>
+     <li> <a className="dropdown-item menu-active  text-dark" onClick={clearLS} ><IoMdLogOut/>LogOut</a></li>
      </ul>
     </li>
       </ul>

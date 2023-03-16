@@ -10,15 +10,38 @@ const AddBooks = () => {
   const [bookName,setBookName] = useState("")
   const [Quantity,setQuantity] = useState("")
   const [bookLang,setBookLang] = useState("")
-  const [bookAuthor,setBookAuthor] = useState("")
+  const [bookAuthor,setBookAuthor] = useState("");
+ const [file, setFile] = useState("");
+ const [bookPdf,setBookPdf] = useState("");
+ const [loading,setLoading] = useState(false)
 
-  const postData = async (e) => {
-    e.preventDefault();
+//  Getting file url
+  const handleUpload =  async() => {
+    setLoading(true)
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "Zaid-Bolte-Chote");
+    data.append("cloud_name", "zaidsiddiqui");
+
+   const res = await fetch("https://api.cloudinary.com/v1_1/zaidsiddiqui/image/upload",{
+    method:"post",
+    body:data
+   })
+   const datas = await res.json();
+   console.log(datas.url)
+   setBookPdf(datas.url)
+   setLoading(false)
+
+  };
+
+
+  const postData = async () => {
        Axios.post("http://localhost:4000/books",{
         bookName,
         Quantity,
         bookLang,
-        bookAuthor
+        bookAuthor,
+        bookPdf
        })
        .then( res => alert(res.data.message))
        navigate("/Books")
@@ -26,7 +49,6 @@ const AddBooks = () => {
   };
   return (
     <>
-    <form method='post' action='/books' name="form" encType='multipart/form-data'>
       <div className="formCont">
         <div className="form-cont">
           <h3 className="Title  text-center mt-3">Add Books</h3>
@@ -83,24 +105,31 @@ const AddBooks = () => {
               onChange={(e)=>setBookAuthor(e.target.value)}
             />
           </div>
-          {/* <div className="input_field">
+
+
+          <div className="input_Upload_field ">
             <label className="label">Upload file</label>
             <br />
             <input
               type="file"
               name="myFile"
-              onChange={(e)=>handleFile(e)}
-              className="inputUser"
+              onChange={(e)=>setFile(e.target.files[0])}
+              className="fileUpload"
             />
-          </div> */}
+          <button  onClick={()=>handleUpload()} className="btn-upload">{loading ? "Loading..." : "Upload"}</button>
+          </div>
+
+
+          <div className="submit_btn">
           <input type="submit"
             className="buttonbtn" value="Submit"
-            onClick={postData}
+            onClick={()=>postData()}
           >
           </input>
+          </div>
         </div>
       </div>
-      </form>
+      
     </>
   );
 };

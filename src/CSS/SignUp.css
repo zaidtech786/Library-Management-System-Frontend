@@ -22,7 +22,6 @@
     border-radius: 7px;
     border: 1px solid #1abc9c;
     outline: none;
- 
 }
 .inputUser::placeholder{
     font-weight: bold;
@@ -68,4 +67,40 @@ p{
     left: 50%;
     background-position: center;
     background-size: 100% 100%;
+}
+.notiLen{
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+}
+.navlinkforpos{
+    position: relative;
+}
+.nav-link{
+    margin: 0 10px;
+}
+
+.btn-upload{
+    border: none;
+    outline: none;
+    font-weight: bold;
+    position: absolute;
+    right: 50px;
+    bottom: 20px;
+
+}
+.input_Upload_field{
+    margin-left:50px;
+    padding: 10px 0px;
+    position: relative;
+}
+.btn-upload:hover{
+    color: gray;
+}
+.fileUpload{
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 5px;
+   
 }

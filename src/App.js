@@ -23,6 +23,7 @@ import Profile from "./components/Profile"
 import Login from "./components/Login"
 import { AppContext } from './Context/Context';
 import AddData from "./components/AddData"
+import ApprovedReqs  from "./Admin/ApprovedReqs";
 import { Home } from "./Student/Home";
 import "./App.css"
 
@@ -33,16 +34,9 @@ function App() {
     <>
         <Navbar/>
       <Routes>
-  {/* <Route path="/admin" element={<AdminLogIn />} /> */}
- {/* <Route path="/student" element={<StudentLogin />}/> */}
  <Route path="/login" element={<Login/>}/>
  <Route path="/signup" element={<SignUp/>}/>
  <Route path="/profile" element={<Profile/>}/>
- {/* <Route path="/nav" element={<Navbar />}/> */}
- {/* <Route path="/viewbooks" element={<ViewBooks />}/> */}
- {/* <Route path="/studentsignup" element={<StudentSignUp />}/> */}
- {/* <Route path="/adminsignup" element={<AdminSignUp />}/> */}
- {/* <Route path="/addstudent" element={<AddStudent />}/> */}
  <Route path="/studentnav" element={<StudentNav />}/>
  <Route path="adminnav" element={<AdminNav/>}> </Route>
  <Route path="/books" element={ <Books /> }/>
@@ -51,14 +45,13 @@ function App() {
  <Route path="/stunotify" element={<Stunotify />}/> 
  <Route path="/stuhome" element={<Home />}/> 
  <Route path="/adminnotify" element={<AdminNotify />}/> 
- {/* <Route path="/addfaculty" element={<AddFaculty />}/>  */}
  <Route path="/viewfaculty" element={<ViewFaculty />}/> 
  <Route path="/issuebook" element={<IssueBook />}/> 
  <Route path="/editdata/:id" element={<EditBooks />}/> 
  <Route path="/edit/:id" element={<EditStudent />}/> 
  <Route path="/editfac/:id" element={<EditFac/>}/> 
- {/* <Route path="/profile" element={<AdminProfile/>}/>  */}
  <Route path="/addbooks" element={<AddBooks/>}/> 
+ <Route path="/approvedreq" element={<ApprovedReqs/>}/> 
 </Routes>   
     </>
   );

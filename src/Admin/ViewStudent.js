@@ -32,8 +32,8 @@ const ViewStudent = () => {
       <div className="table_container">
         <h1 className="text-center my-5">Student List</h1>
         <input type="search" className="search" value={search}  placeholder="Search" onChange={(event)=>setSearch(event.target.value)}/>
-        <div className= {StudentDatas.length>7 ?'table-container' : ""}   >
-        <div className={StudentDatas.length>7 ?'tbl-fixed' : ""}>
+        <div className= {StudentDatas.length>9?'table-container' : ""}   >
+        <div className={StudentDatas.length>9?'tbl-fixed' : ""}>
         <table className='table'>
         <thead>
           <tr>

@@ -39,7 +39,7 @@ const Books = () => {
   };
 
   const DeleteBook = (id) => {
-    Axios.get(`http://localhost:4000/delete/${id}`).then(() => {
+    Axios.delete(`http://localhost:4000/delete/${id}`).then(() => {
       setBookDatas(
         bookDatas.filter((val) => {
           return val._id != id;
@@ -62,7 +62,7 @@ const Books = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <div className="table-container">
-          <div className="tbl-fixed ">
+          <div className={bookDatas.length > 9? "tbl-fixed" : ""}>
             <div className="table-responsive">
             <table className="table ">
               <thead>

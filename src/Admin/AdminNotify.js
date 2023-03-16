@@ -13,8 +13,8 @@ const AdminNotify = () => {
   const getData = () => {
     Axios.get("http://localhost:4000/getAllReq").then((res) => {
       setStuBookData(res.data);
+      console.log(res.data)
       reqDispatch({ type: "GETALLREQ", payload: res.data });
-      console.log(res.data);
     });
   };
   useEffect(() => {
@@ -53,7 +53,7 @@ const AdminNotify = () => {
           return item;
         }
       });
-      console.log("NewData : ",newData  )
+      console.log("NewData : ", newData);
       setStuBookData(newData);
     });
     //    Axios.get('http://localhost:4000/getAllReq').then((res)=>{
@@ -73,70 +73,85 @@ const AdminNotify = () => {
       <div className="table_container">
         <h2 className="text-center h2">Book Request </h2>
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th> Student Name </th>
-              <th> Book Name </th>
-              <th> Book Language </th>
-              <th> Book Quantity </th>
-              <th> operation </th>
-              <th> Approved </th>
+{
+  stuBookData.length > 0
+  ?
+  <table className="table">
+  <thead>
+    <tr>
+      <th> Student Name </th>
+      <th> Book Name </th>
+      <th> Book Language </th>
+      <th> Book Quantity </th>
+      <th> operation </th>
+    </tr>
+  </thead>
+  {stuBookData.map((curElem) => {
+          return (
+            <tbody key={curElem._id}>
+            {
+              curElem.approved === false 
+              ? 
+              <>
+           
+              <tr>
+              <td data-label="Student Name">
+                {curElem.studentId.firstName}
+                {curElem.studentId.lastName}
+              </td>
+              <td data-label="Book Name">{curElem.bookId?.bookName}</td>
+              <td data-label="Book Language">
+                {curElem.bookId?.bookLang}
+              </td>
+              <td data-label="Book Quantity">
+                {curElem.bookId?.Quantity}
+              </td>
+              <td data-label="Operation">
+                {curElem.approved ? (
+                  <p>--</p>
+                ) : (
+                  <>
+                    <button
+                      className="btn btn-success Accept"
+                      onClick={() =>
+                        AcceptReq(
+                          curElem._id,
+                          curElem.bookId._id,
+                          curElem.studentId._id
+                        )
+                      }
+                    >
+                      Accept
+                    </button>
+                    <button
+                      className="btn btn-danger Reject"
+                      onClick={() => rejectReq(curElem._id)}
+                    >
+                      Reject
+                    </button>
+                  </>
+                )}
+              </td>
+              
             </tr>
-          </thead>
-          {stuBookData.map((curElem) => {
-            return (
-              <tbody key={curElem._id}>
-                <tr>
-                  <td data-label="Student Name">
-                    {curElem.studentId.firstName} {curElem.studentId.lastName}{" "}
-                  </td>
-                  <td data-label="Book Name">{curElem.bookId.bookName}</td>
-                  <td data-label="Book Language">{curElem.bookId.bookLang}</td>
-                  <td data-label="Book Quantity">{curElem.bookId.Quantity}</td>
-                  <td data-label="Operation">
-                    {curElem.approved ? (
-                      <p>--</p>
-                    ) : (
-                      <>
-                        <button
-                          className="btn btn-success Accept"
-                          onClick={() =>
-                            AcceptReq(
-                              curElem._id,
-                              curElem.bookId._id,
-                              curElem.studentId._id
-                            )
-                          }
-                        >
-                          Accept
-                        </button>
-                        <button
-                          className="btn btn-danger Reject"
-                          onClick={() => rejectReq(curElem._id)}
-                        >
-                          Reject
-                        </button>
-                      </>
-                    )}
-                  </td>
-                  <td data-label="Approved">
-                    {curElem.approved ? (
-                      <p>
-                        Approved By{" "}
-                        {curElem.approvedBy?._id === admin._id
-                          ? " Your Side"
-                          : curElem.approvedBy?.firstName}{" "}
-                      </p>
-                    ) : (
-                      <p>--</p>
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+            </>
+            :
+            // <h1>No Issue Book Found</h1>
+            ""
+            
+        
+            
+            }
+           
+          </tbody>
+          );
+       
+  })}
+</table>
+:
+<h1 style={{marginTop:"200px",fontStyle:"italic"}}>No data Found</h1>
+}
+       
       </div>
     </>
   );
